@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
@@ -20,6 +21,27 @@ namespace FortyOne.AudioSwitcher
         [STAThread]
         private static void Main()
         {
+
+            // this checks if instance is already running
+            // if it is running, we set the focus to the already running one
+            Process[] proc = System.Diagnostics.Process.GetProcessesByName(System.IO.Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location));
+
+            if (proc != null && proc.Length > 1)
+            {
+                Process loadedProcess = proc[0];
+
+                // check if the window is hidden / minimized
+                if (loadedProcess.MainWindowHandle == IntPtr.Zero)
+                {
+                    // the window is hidden so try to restore it before setting focus.
+                    HotKeyData.NativeMethods.ShowWindow(loadedProcess.Handle, HotKeyData.NativeMethods.ShowWindowCommand.SW_RESTORE);
+                }
+
+                // set user the focus to the window
+                HotKeyData.NativeMethods.SetForegroundWindow(loadedProcess.MainWindowHandle);
+                return;
+            }
+
             Application.ThreadException += WinFormExceptionHandler.OnThreadException;
             AppDomain.CurrentDomain.UnhandledException += WinFormExceptionHandler.OnUnhandledCLRException;
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
