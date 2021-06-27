@@ -1292,7 +1292,25 @@ namespace FortyOne.AudioSwitcher
             {
                 var hk = sender as HotKey;
 
-                if (hk.Device == null || hk.Device.IsDefaultDevice)
+                if (hk.Device == null) return;
+
+                // DANJ; https://github.com/JokingChicken
+                // here we need to check if the HotKey is a toggle.
+                // And then decide where to switch to :)
+                if (hk.isToggle())
+                {
+                    if (hk.Device.IsDefaultDevice)
+                    {
+                        // switch to other device
+                        await hk.ToggleDevice.SetAsDefaultAsync();
+
+                        if (Program.Settings.DualSwitchMode)
+                            await hk.ToggleDevice.SetAsDefaultCommunicationsAsync();
+                        return;
+                    }
+                }
+
+                if (hk.Device.IsDefaultDevice)
                     return;
 
                 await hk.Device.SetAsDefaultAsync();
@@ -1478,5 +1496,5 @@ namespace FortyOne.AudioSwitcher
 				}));
 			}
 		}
-	}
+    }
 }

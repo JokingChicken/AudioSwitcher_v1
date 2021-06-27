@@ -34,14 +34,25 @@ namespace FortyOne.AudioSwitcher
                 _deviceStateFilter |= DeviceState.Unplugged;
 
             cmbDevices.Items.Clear();
+            togglecmbDevices.Items.Clear();
             foreach (var ad in AudioDeviceManager.Controller.GetPlaybackDevices(_deviceStateFilter))
+            {
                 cmbDevices.Items.Add(ad);
+                togglecmbDevices.Items.Add(ad);
+            }
+                
 
             foreach (var ad in AudioDeviceManager.Controller.GetCaptureDevices(_deviceStateFilter))
+            {
                 cmbDevices.Items.Add(ad);
+                togglecmbDevices.Items.Add(ad);
+            }
 
             cmbDevices.DisplayMember = "FullName";
             cmbDevices.ValueMember = "ID";
+
+            togglecmbDevices.DisplayMember = "test";
+            togglecmbDevices.ValueMember = "ID";
         }
 
         public HotKeyForm(HotKey hk)
@@ -52,6 +63,7 @@ namespace FortyOne.AudioSwitcher
             _hotkey.DeviceId = hk.DeviceId;
             _hotkey.Key = hk.Key;
             _hotkey.Modifiers = hk.Modifiers;
+            _hotkey.ToggleDeviceID = hk.ToggleDeviceID;
 
             txtHotKey.Text = hk.HotKeyString;
             _firstFocus = false;
@@ -68,6 +80,12 @@ namespace FortyOne.AudioSwitcher
 
             foreach (var o in cmbDevices.Items)
             {
+                if (((IDevice)o).Id == _hotkey.ToggleDeviceID)
+                {
+                    this.cbtoggle.Checked = true;
+                    togglecmbDevices.SelectedIndex = togglecmbDevices.Items.IndexOf(o);
+                }
+
                 if (((IDevice)o).Id == _hotkey.DeviceId)
                 {
                     cmbDevices.SelectedIndex = cmbDevices.Items.IndexOf(o);
@@ -77,6 +95,9 @@ namespace FortyOne.AudioSwitcher
 
             cmbDevices.DisplayMember = "FullName";
             cmbDevices.ValueMember = "ID";
+
+            togglecmbDevices.DisplayMember = "test";
+            togglecmbDevices.ValueMember = "ID";
         }
 
         private void txtHotKey_Enter(object sender, EventArgs e)
@@ -147,6 +168,14 @@ namespace FortyOne.AudioSwitcher
                 return;
 
             _hotkey.DeviceId = ((IDevice)cmbDevices.SelectedItem).Id;
+        } 
+        
+        private void togglecmbDevices_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (togglecmbDevices.SelectedItem == null)
+                return;
+
+            _hotkey.ToggleDeviceID = ((IDevice)togglecmbDevices.SelectedItem).Id;
         }
 
         private void HotKeyForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -154,5 +183,20 @@ namespace FortyOne.AudioSwitcher
             AudioSwitcher.Instance.DisableHotKeyFunction = false;
         }
 
+        private void cbtoggle_CheckedChanged(object sender, EventArgs e)
+        {
+            var box = sender as CheckBox;
+            if(box.Checked)
+            {
+                // display toggle device option
+                this.togglecmbDevices.Visible = true;
+            }
+            else
+            {
+                // Remove the option and set toggle device on empty
+                this.togglecmbDevices.Visible = false;
+                this._hotkey.ToggleDeviceID = Guid.Empty;
+            }
+        }
     }
 }

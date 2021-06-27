@@ -53,28 +53,36 @@ namespace FortyOne.AudioSwitcher.HotKeyData
 
                 var entries = hotkeydata.Split(new[] { ",", "[", "]" }, StringSplitOptions.RemoveEmptyEntries);
 
-                for (var i = 0; i < entries.Length; i++)
+                for (var i = 0; i < entries.Length; i += 4)
                 {
-                    var key = int.Parse(entries[i++]);
-                    var modifiers = int.Parse(entries[i++]);
+                    var key = int.Parse(entries[i]);
+                    var modifiers = int.Parse(entries[i+1]);
+
+                    var device1 = entries[i+2].ToString();
+                    var device2 = entries[i + 3].ToString();
+
                     var hk = new HotKey();
 
                     var r = new Regex(ConfigurationSettings.GUID_REGEX);
-                    var matches = r.Matches(entries[i]);
-                    if (matches.Count == 0)
-                        continue;
-                    hk.DeviceId = new Guid(matches[0].ToString());
+                    // here we check if the string is valid Guid
+                    if (!r.Match(device1).Success) continue;
+                    if (!r.Match(device2).Success) device2 = Guid.Empty.ToString();
+
+                    hk.DeviceId = new Guid(device1);
+                    hk.ToggleDeviceID = new Guid(device2);
 
                     hk.Modifiers = (Modifiers)modifiers;
                     hk.Key = (Keys)key;
+
                     _hotkeys.Add(hk);
+
                     hk.HotKeyPressed += hk_HotKeyPressed;
                     hk.RegisterHotkey();
                 }
             }
             catch
             {
-                Program.Settings.HotKeys = "";
+                Program.Settings.HotKeys = ""; // TODO: DanJ: maybe try to recover, instead of removing whole storage object
             }
         }
 
@@ -89,7 +97,7 @@ namespace FortyOne.AudioSwitcher.HotKeyData
             var hotkeydata = "";
             foreach (var hk in _hotkeys)
             {
-                hotkeydata += "[" + (int)hk.Key + "," + (int)hk.Modifiers + "," + hk.DeviceId + "]";
+                hotkeydata += "[" + (int)hk.Key + "," + (int)hk.Modifiers + "," + hk.DeviceId + "," + hk.ToggleDeviceID.ToString() + "]";
             }
             Program.Settings.HotKeys = hotkeydata;
 

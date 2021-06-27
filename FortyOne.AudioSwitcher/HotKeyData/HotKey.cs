@@ -90,6 +90,21 @@ namespace FortyOne.AudioSwitcher.HotKeyData
         /// </remarks>
         public Keys Key { get; set; }
 
+        /// <summary>
+        ///     The deviceID that is only set
+        /// </summary>
+        public Guid ToggleDeviceID { get; set; }
+
+        public IDevice ToggleDevice
+        {
+            get { return AudioDeviceManager.Controller.GetDevice(ToggleDeviceID); }
+        }
+
+        public Boolean isToggle()
+        {
+            return (!ToggleDeviceID.Equals(Guid.Empty)) || ToggleDevice != null;
+        }
+
         public void Dispose()
         {
             // unregister the current hotkey...
