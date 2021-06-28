@@ -110,6 +110,7 @@
             this.statusLabelUpdate = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusLabelDonate = new System.Windows.Forms.ToolStripStatusLabel();
+            this.soundbox1 = new System.Windows.Forms.CheckBox();
             this.playbackStrip.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tapPlayback.SuspendLayout();
@@ -402,6 +403,7 @@
             // 
             // tapSettings
             // 
+            this.tapSettings.Controls.Add(this.soundbox1);
             this.tapSettings.Controls.Add(this.chkShowUnknownDevicesInHotkeyList);
             this.tapSettings.Controls.Add(this.chkNotifyUpdates);
             this.tapSettings.Controls.Add(this.chkShowDPDeviceIconInTray);
@@ -426,7 +428,7 @@
             // chkShowUnknownDevicesInHotkeyList
             // 
             this.chkShowUnknownDevicesInHotkeyList.AutoSize = true;
-            this.chkShowUnknownDevicesInHotkeyList.Location = new System.Drawing.Point(14, 177);
+            this.chkShowUnknownDevicesInHotkeyList.Location = new System.Drawing.Point(14, 167);
             this.chkShowUnknownDevicesInHotkeyList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkShowUnknownDevicesInHotkeyList.Name = "chkShowUnknownDevicesInHotkeyList";
             this.chkShowUnknownDevicesInHotkeyList.Size = new System.Drawing.Size(212, 17);
@@ -438,7 +440,7 @@
             // chkNotifyUpdates
             // 
             this.chkNotifyUpdates.AutoSize = true;
-            this.chkNotifyUpdates.Location = new System.Drawing.Point(14, 246);
+            this.chkNotifyUpdates.Location = new System.Drawing.Point(14, 236);
             this.chkNotifyUpdates.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkNotifyUpdates.Name = "chkNotifyUpdates";
             this.chkNotifyUpdates.Size = new System.Drawing.Size(174, 17);
@@ -450,7 +452,7 @@
             // chkShowDPDeviceIconInTray
             // 
             this.chkShowDPDeviceIconInTray.AutoSize = true;
-            this.chkShowDPDeviceIconInTray.Location = new System.Drawing.Point(14, 223);
+            this.chkShowDPDeviceIconInTray.Location = new System.Drawing.Point(14, 213);
             this.chkShowDPDeviceIconInTray.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkShowDPDeviceIconInTray.Name = "chkShowDPDeviceIconInTray";
             this.chkShowDPDeviceIconInTray.Size = new System.Drawing.Size(228, 17);
@@ -474,7 +476,7 @@
             // chkShowDisconnectedDevices
             // 
             this.chkShowDisconnectedDevices.AutoSize = true;
-            this.chkShowDisconnectedDevices.Location = new System.Drawing.Point(14, 200);
+            this.chkShowDisconnectedDevices.Location = new System.Drawing.Point(14, 190);
             this.chkShowDisconnectedDevices.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkShowDisconnectedDevices.Name = "chkShowDisconnectedDevices";
             this.chkShowDisconnectedDevices.Size = new System.Drawing.Size(164, 17);
@@ -486,7 +488,7 @@
             // chkShowDiabledDevices
             // 
             this.chkShowDiabledDevices.AutoSize = true;
-            this.chkShowDiabledDevices.Location = new System.Drawing.Point(14, 154);
+            this.chkShowDiabledDevices.Location = new System.Drawing.Point(14, 144);
             this.chkShowDiabledDevices.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkShowDiabledDevices.Name = "chkShowDiabledDevices";
             this.chkShowDiabledDevices.Size = new System.Drawing.Size(139, 17);
@@ -498,7 +500,7 @@
             // chkCloseToTray
             // 
             this.chkCloseToTray.AutoSize = true;
-            this.chkCloseToTray.Location = new System.Drawing.Point(14, 16);
+            this.chkCloseToTray.Location = new System.Drawing.Point(14, 6);
             this.chkCloseToTray.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkCloseToTray.Name = "chkCloseToTray";
             this.chkCloseToTray.Size = new System.Drawing.Size(88, 17);
@@ -511,7 +513,7 @@
             // chkDualSwitchMode
             // 
             this.chkDualSwitchMode.AutoSize = true;
-            this.chkDualSwitchMode.Location = new System.Drawing.Point(14, 131);
+            this.chkDualSwitchMode.Location = new System.Drawing.Point(14, 121);
             this.chkDualSwitchMode.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkDualSwitchMode.Name = "chkDualSwitchMode";
             this.chkDualSwitchMode.Size = new System.Drawing.Size(144, 17);
@@ -525,7 +527,7 @@
             // chkAutoStartWithWindows
             // 
             this.chkAutoStartWithWindows.AutoSize = true;
-            this.chkAutoStartWithWindows.Location = new System.Drawing.Point(14, 39);
+            this.chkAutoStartWithWindows.Location = new System.Drawing.Point(14, 29);
             this.chkAutoStartWithWindows.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkAutoStartWithWindows.Name = "chkAutoStartWithWindows";
             this.chkAutoStartWithWindows.Size = new System.Drawing.Size(152, 17);
@@ -538,7 +540,7 @@
             // chkStartMinimized
             // 
             this.chkStartMinimized.AutoSize = true;
-            this.chkStartMinimized.Location = new System.Drawing.Point(14, 62);
+            this.chkStartMinimized.Location = new System.Drawing.Point(14, 52);
             this.chkStartMinimized.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkStartMinimized.Name = "chkStartMinimized";
             this.chkStartMinimized.Size = new System.Drawing.Size(96, 17);
@@ -551,7 +553,7 @@
             // chkDisableHotKeys
             // 
             this.chkDisableHotKeys.AutoSize = true;
-            this.chkDisableHotKeys.Location = new System.Drawing.Point(14, 85);
+            this.chkDisableHotKeys.Location = new System.Drawing.Point(14, 75);
             this.chkDisableHotKeys.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkDisableHotKeys.Name = "chkDisableHotKeys";
             this.chkDisableHotKeys.Size = new System.Drawing.Size(104, 17);
@@ -564,7 +566,7 @@
             // chkQuickSwitch
             // 
             this.chkQuickSwitch.AutoSize = true;
-            this.chkQuickSwitch.Location = new System.Drawing.Point(14, 108);
+            this.chkQuickSwitch.Location = new System.Drawing.Point(14, 98);
             this.chkQuickSwitch.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.chkQuickSwitch.Name = "chkQuickSwitch";
             this.chkQuickSwitch.Size = new System.Drawing.Size(150, 17);
@@ -1001,6 +1003,18 @@
             this.statusLabelDonate.ToolTipText = "Donate via PayPal";
             this.statusLabelDonate.Click += new System.EventHandler(this.statusLabelDonate_Click);
             // 
+            // soundbox1
+            // 
+            this.soundbox1.AutoSize = true;
+            this.soundbox1.Location = new System.Drawing.Point(14, 258);
+            this.soundbox1.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.soundbox1.Name = "soundbox1";
+            this.soundbox1.Size = new System.Drawing.Size(174, 17);
+            this.soundbox1.TabIndex = 17;
+            this.soundbox1.Text = "Play sound when changing device";
+            this.soundbox1.UseVisualStyleBackColor = true;
+            this.soundbox1.CheckedChanged += new System.EventHandler(this.soundbox1_CheckedChanged);
+            // 
             // AudioSwitcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1133,6 +1147,7 @@
         private System.Windows.Forms.PictureBox openControlPanelPlayback;
         private System.Windows.Forms.PictureBox openControlPanelRecording;
 		private System.Windows.Forms.CheckBox chkShowUnknownDevicesInHotkeyList;
-	}
+        private System.Windows.Forms.CheckBox soundbox1;
+    }
 }
 

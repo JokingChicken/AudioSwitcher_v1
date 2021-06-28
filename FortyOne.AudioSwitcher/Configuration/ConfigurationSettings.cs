@@ -8,6 +8,7 @@ namespace FortyOne.AudioSwitcher.Configuration
     public class ConfigurationSettings
     {
         public const string GUID_REGEX = @"([a-z0-9]{8}[-][a-z0-9]{4}[-][a-z0-9]{4}[-][a-z0-9]{4}[-][a-z0-9]{12})";
+
         public const string SETTING_CLOSETOTRAY = "CloseToTray";
         public const string SETTING_AUTOSTARTWITHWINDOWS = "AutoStartWithWindows";
         public const string SETTING_STARTMINIMIZED = "StartMinimized";
@@ -22,11 +23,13 @@ namespace FortyOne.AudioSwitcher.Configuration
         public const string SETTING_STARTUPRECORDINGDEVICE = "StartupRecordingDeviceID";
         public const string SETTING_STARTUPPLAYBACKDEVICE = "StartupPlaybackDeviceID";
         public const string SETTING_DUALSWITCHMODE = "DualSwitchMode";
+        public const string SETTING_PLAYSOUNDS = "PlaySounds";
         public const string SETTING_SHOWDISABLEDDEVICES = "ShowDisabledDevices";
         public const string SETTING_SHOWUNKNOWNDEVICESINHOTKEYLIST = "ShowUnknownDevicesInHotkeyList";
         public const string SETTING_SHOWDISCONNECTEDDDEVICES = "ShowDisconnectedDevices";
         public const string SETTING_SHOWDPDEVICEIICONINTRAY = "ShowDPDeviceIconInTray";
         public const string SETTING_UPDATE_NOTIFICATIONS_ENABLED = "UpdateNotificationsEnabled";
+
         private readonly ISettingsSource _configWriter;
 
         public ConfigurationSettings(ISettingsSource source)
@@ -59,6 +62,18 @@ namespace FortyOne.AudioSwitcher.Configuration
                 return Guid.Empty;
             }
             set { _configWriter.Set(SETTING_STARTUPPLAYBACKDEVICE, value.ToString()); }
+        }
+
+        public Boolean playsounds
+        {
+            get
+            {
+                return Convert.ToBoolean(_configWriter.Get(SETTING_PLAYSOUNDS));
+            }
+            set
+            {
+                _configWriter.Set(SETTING_PLAYSOUNDS, value.ToString());
+            }
         }
 
         public int PollForUpdates
@@ -242,6 +257,9 @@ namespace FortyOne.AudioSwitcher.Configuration
 
         public void CreateDefaults()
         {
+            if (!SettingExists(SETTING_PLAYSOUNDS))
+                playsounds = true;
+
             if (!SettingExists(SETTING_CLOSETOTRAY))
                 CloseToTray = false;
 
@@ -304,6 +322,7 @@ namespace FortyOne.AudioSwitcher.Configuration
 
         public void LoadFrom(ConfigurationSettings otherSettings)
         {
+            playsounds = otherSettings.playsounds;
             AutoStartWithWindows = otherSettings.AutoStartWithWindows;
             CheckForUpdatesOnStartup = otherSettings.CheckForUpdatesOnStartup;
             CloseToTray = otherSettings.CloseToTray;

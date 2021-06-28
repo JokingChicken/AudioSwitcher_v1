@@ -1306,6 +1306,10 @@ namespace FortyOne.AudioSwitcher
 
                         if (Program.Settings.DualSwitchMode)
                             await hk.ToggleDevice.SetAsDefaultCommunicationsAsync();
+
+                        if (Program.Settings.playsounds)
+                            System.Media.SystemSounds.Asterisk.Play();
+
                         return;
                     }
                 }
@@ -1317,6 +1321,9 @@ namespace FortyOne.AudioSwitcher
 
                 if (Program.Settings.DualSwitchMode)
                     await hk.Device.SetAsDefaultCommunicationsAsync();
+
+                if (Program.Settings.playsounds)
+                    System.Media.SystemSounds.Hand.Play();
             }
         }
 
@@ -1496,5 +1503,11 @@ namespace FortyOne.AudioSwitcher
 				}));
 			}
 		}
+
+        // DANJ; will set the setting for playing sound or not
+        private void soundbox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Settings.playsounds = soundbox1.Checked;
+        }
     }
 }
