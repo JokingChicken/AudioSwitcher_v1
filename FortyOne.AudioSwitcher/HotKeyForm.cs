@@ -51,7 +51,7 @@ namespace FortyOne.AudioSwitcher
             cmbDevices.DisplayMember = "FullName";
             cmbDevices.ValueMember = "ID";
 
-            togglecmbDevices.DisplayMember = "test";
+            togglecmbDevices.DisplayMember = "FullName";
             togglecmbDevices.ValueMember = "ID";
         }
 
@@ -96,7 +96,7 @@ namespace FortyOne.AudioSwitcher
             cmbDevices.DisplayMember = "FullName";
             cmbDevices.ValueMember = "ID";
 
-            togglecmbDevices.DisplayMember = "test";
+            togglecmbDevices.DisplayMember = "FullName";
             togglecmbDevices.ValueMember = "ID";
         }
 
